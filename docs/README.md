@@ -1,4 +1,4 @@
-[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE.md)
+[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](../LICENSE)
 [![Not use](https://img.shields.io/badge/Framework-Not_use-blue.svg)](https://nodejs.org/ja/)
 ![hidao quality](https://img.shields.io/badge/hidao-quality-orange.svg)
 
