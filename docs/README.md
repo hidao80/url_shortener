@@ -1,5 +1,5 @@
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](../LICENSE)
-[![Not use](https://img.shields.io/badge/Framework-Not_use-blue.svg)](https://nodejs.org/ja/)
+[![Not use](https://img.shields.io/badge/Framework-Not_use-blue.svg)](https://www.php.net/)
 ![hidao quality](https://img.shields.io/badge/hidao-quality-orange.svg)
 
 ## url_shortener is 何
