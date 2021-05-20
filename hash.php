@@ -12,7 +12,7 @@ if (!isset($_GET['q'])) {
     $key = duplicate_avoidance($db_json, $digest, $_GET['q']);
     $db_json[$key] = $_GET['q'];
     
-    file_put_contents('./db.json', json_encode($db_json));
+    file_put_contents('./db.json', json_encode($db_json), LOCK_EX);
     
     $shorted_url = $base_url . "/?h=" . $key;
     
