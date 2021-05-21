@@ -14,8 +14,12 @@ if (!isset($_GET['h'])) {
     </form>
 HTML;
 } else {
+    $lock = fopen('./db.lock', 'w');
+    flock($lock, LOCK_SH);
     // パラメータ"h"があれば、データベースに登録があるかどうか確認
     $original_url = json_decode(file_get_contents('./db.json'), true)[$_GET['h']];
+    flock($lock, LOCK_UN);
+    fclose($lock);
 
     if ($original_url) {
         // データベースにダイジェストが登録されている
