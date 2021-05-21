@@ -6,6 +6,8 @@ $theme_color = "#d98822";
 if (!isset($_GET['q'])) {
     $congtents = "URLの指定がありません！";
 } else {
+    $lock = fopen('./db.lock', 'w');
+    flock($lock, LOCK_EX);
     $db_json = json_decode(file_get_contents('./db.json'), true);
 
     $digest = hash('crc32b', $_GET['q']);
@@ -13,6 +15,8 @@ if (!isset($_GET['q'])) {
     $db_json[$key] = $_GET['q'];
     
     file_put_contents('./db.json', json_encode($db_json), LOCK_EX);
+    flock($lock, LOCK_UN);
+    fclose($lock);
     
     $shorted_url = $base_url . "/?h=" . $key;
     
