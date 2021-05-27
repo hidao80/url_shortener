@@ -1,20 +1,26 @@
 <?php
-$base_url = "https://your.domain/path/to/dir";
-$title = "URL短縮ツール";
-$theme_color = "#d98822";
+require_once("env.php");
 
 if (!isset($_GET['q'])) {
-    $congtents = "URLの指定がありません！";
+    $contents = "URLの指定がありません！";
 } else {
-    $db_json = json_decode(file_get_contents('./db.json'), true);
+        $fp = fopen(DB_FILENAME, 'a+');
+        if (flock($fp, LOCK_EX)) {
+            $json = json_decode(fread($fp, filesize(DB_FILENAME)), true);
 
-    $digest = hash('crc32b', $_GET['q']);
-    $key = duplicate_avoidance($db_json, $digest, $_GET['q']);
-    $db_json[$key] = $_GET['q'];
-    
-    file_put_contents('./db.json', json_encode($db_json), LOCK_EX);
-    
-    $shorted_url = $base_url . "/?h=" . $key;
+            $digest = hash('crc32b', $_GET['q']);
+            $key = duplicate_avoidance($json, $digest, $_GET['q']);
+            $json[$key] = $_GET['q'];
+
+            ftruncate($fp, 0);
+            fwrite($fp, json_encode($json));
+            fflush($fp);
+            flock($fp, LOCK_UN);
+        }
+        fclose($fp);
+    }
+
+    $shorted_url = BASE_URL . "/?h=" . $key;
     
     $contents = <<< HTML
     <p>短縮URLは</p>
@@ -23,7 +29,8 @@ if (!isset($_GET['q'])) {
 HTML;
 }
 
-function duplicate_avoidance($db_json, $digest, $url, $index = 0) {
+function duplicate_avoidance($db_json, $digest, $url, $index = 0)
+{
     if (array_key_exists($digest . $index, $db_json) && $db_json[$digest . $index] !== $url) {
         $index++;
         return duplicate_avoidance($db_json, $digest, $url, $index);

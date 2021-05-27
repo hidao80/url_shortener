@@ -1,12 +1,11 @@
-<?php
-echo <<<HTML
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title}</title>
+  <title><?= TITLE ?>
+  </title>
   <style>
     input[type="text"],
     input[type="tel"] {
@@ -25,7 +24,9 @@ echo <<<HTML
       appearance: none;
       border: 0;
       border-radius: 5px;
-      background: ${theme_color};
+      background:
+        <?= THEME_COLOR ?>
+      ;
       color: #fff;
       padding: 8px 16px;
       -webkit-box-sizing: content-box;
@@ -33,7 +34,9 @@ echo <<<HTML
     }
 
     header {
-      background-color: ${theme_color};
+      background-color:
+        <?= THEME_COLOR ?>
+      ;
       height: 15vh;
       text-align: center;
     }
@@ -45,7 +48,9 @@ echo <<<HTML
     }
 
     footer {
-      background-color: ${theme_color};
+      background-color:
+        <?= THEME_COLOR ?>
+      ;
       height: 15vh;
       margin-top: auto
     }
@@ -72,13 +77,13 @@ echo <<<HTML
 
 <body>
   <header>
-    <div>${title}</div>
+    <div><?= TITLE ?>
+    </div>
   </header>
   <div class="container">
-    ${contents}
+    <?= $contents ?>
   </div>
   <footer></footer>
 </body>
 
 </html>
-HTML;
