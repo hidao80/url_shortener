@@ -7,7 +7,7 @@ if (!isset($_GET['h'])) {
     <form action="hash.php" method="GET">
       短縮したいURLを入力してください。<br>
       <label for="q" accesskey="q">URL：</label>
-      <input type="text" name="q" id="q" value="{$_(BASE_URL)}">
+      <input type="text" name="q" id="q" value="" placeholder="https://sample.com/index.html">
       <input type="submit">
     </form>
 HTML;
